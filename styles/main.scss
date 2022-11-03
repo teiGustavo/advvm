@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+@import "navbar";
+@import "scrollbar";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto-Sans', sans-serif;
+    background: #201b2c;
+    width: 99vw;
+    height: 100vh;
+
+    .main-login {
+        width: 99vw;
+        background: #201b2c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+    
+        .left-login {
+            width: 50vw;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        
+            h1 {
+                color: #77ffc0;
+                font-size: 3vw;
+            }
+
+            .left-login-image {
+                width: 35vw;
+                display: block;
+            }
+        } 
+        
+        .right-login {
+            width: 50vw;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    
+            .card-login {
+                width: 70%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                padding: 30px 35px;
+                background: #2f2841;
+                border-radius: 20px;
+                box-shadow: 0px 10px 40px #00000056;
+    
+                h1 {
+                    color: #00ff88;
+                    font-weight: 800;
+                    margin: 0;
+                }
+
+                a {
+                    color: white;
+                }
+    
+                .textfield {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                    margin: 10px 0px;
+                    width: 100%;
+
+                    input, select {
+                        width: 100%;
+                        border: none;
+                        border-radius: 10px;
+                        padding: 15px;
+                        background: #514869;
+                        color: #f0ffffde;
+                        font-size: 12pt;
+                        box-shadow: 0px 10px 40px #00000056;
+                        outline: none;
+                        box-sizing: border-box;
+                    }
+
+                    select, option {  
+                        text-transform: capitalize;
+                    }
+    
+                    label {
+                        color: #f0ffffde;
+                        margin-bottom: 10px;
+    
+                    }
+    
+                    input::placeholder {
+                        color: #f0ffff94;
+                    }
+
+                    input:invalid {
+                        animation-name: shake;
+                        animation-duration: 0.4s;
+                    }
+
+                    @keyframes shake {
+                        25% { transform: translateX(4px) }
+                        50% { transform: translateX(-4px) }
+                        75% { transform: translateX(4px) }
+                    }
+                }
+            }
+    
+            .btn-login {
+                width: 100%;
+                padding: 16px 0px;
+                margin: 25px;
+                border: none;
+                border-radius: 8px;
+                outline: none;
+                text-transform: uppercase;
+                font-weight: 800;
+                letter-spacing: 3px;
+                color: #2b134b;
+                background: #00ff88;
+                cursor: pointer;
+                box-shadow: 0px 10px 40px -12px #00ff8052;
+            }
+        }
+    }
+
+    .tabela{
+        text-align: center;
+        margin: auto;
+        width: fit-content;
+        color: aqua;
+
+        a {
+            color: white;
+        }
+
+        .tabela2{
+            margin-top: 10vw;
+            border-collapse: collapse;
+            
+            table, th, td {
+                border: 1px solid;
+                padding: 25px;
+                color: white;
+            }
+            
+            th {
+                text-transform: uppercase;
+            }
+
+            .cod_lancamento {
+                display: none;
+            }
+        }
+    }
+    
+    @media only screen and (max-width: 900px) {
+        .main-login {
+            flex-direction: column;
+        
+            .left-login {
+                width: 100%;
+                height: 35vh;
+
+                h1 {
+                    display: none;
+                }
+
+                .left-login-image {
+                    width: 30vw;
+                    padding-bottom: 5vh;
+                }
+            }
+
+            .right-login {
+                width: 100%;
+                height: auto;
+
+                .card-login {
+                    width: 85vw;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        .main-login {
+            flex-direction: column;
+        
+            .left-login {
+                width: 100%;
+                height: 35vh;
+
+                h1 {
+                    display: none;
+                }
+
+                .left-login-image {
+                    width: 30%;
+                    padding-bottom: 5vh;
+                }
+            }
+
+            .right-login {
+                width: 100%;
+                height: auto;
+
+                .card-login {
+                    width: 85vw;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .main-login {
+            flex-direction: column;
+        
+            .left-login {
+                width: 100%;
+                height: 35vh;
+
+                h1 {
+                    display: none;
+                }
+
+                .left-login-image {
+                    width: 50vw;
+                    padding-bottom: 5vh;
+                }
+            }
+
+            .right-login {
+                width: 100%;
+                height: auto;
+
+                .card-login {
+                    width: 85vw;
+                }
+            }
+        }
+    }
+
+    img {
+        display: none;
+    }
+}
