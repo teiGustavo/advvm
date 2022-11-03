@@ -40,7 +40,6 @@
                             </select>
                         </div>
                         <button type="submit" class="btn-login" name="btn">Consultar</button>
-                        <a href="index.php">Cadastar lançamentos aqui!</a>
                     </div>
                 </div>
             </form>

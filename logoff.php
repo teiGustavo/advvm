@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if (!isset($_SESSION)) {
+        session_start();
+    }
 
     $_SESSION["logado"] = 0;
     $_SESSION["adm"] = 0;

@@ -45,7 +45,6 @@
                             </select>
                         </div>
                         <button type="submit" class="btn-login" name="btn">CADASTRAR</button>
-                        <a href="consulta.php">Consultar relatórios aqui!</a>
                     </div>
                 </div>
             </form>

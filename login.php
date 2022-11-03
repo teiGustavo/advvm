@@ -1,5 +1,9 @@
 <?php
-   include "verificaSessao.php";
+    include "conexao.php";
+
+    if (!isset($_SESSION)) {
+        session_start();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +35,7 @@
                             <input type="password" name="Senha" placeholder="Insira sua senha aqui" required>
                         </div>
                         <button type="submit" class="btn-login" name="btn-logar">LOGAR</button>
+                        <a href="index.php">Entrar sem conta</a>
                     </div>
                 </div>
             </form>
@@ -38,8 +43,6 @@
         </div>
 
         <?php 
-            include "conexao.php";
-
             if (isset($_POST['btn-logar'])) {
                 $email = $_POST['Email'];
                 $senha = $_POST['Senha'];
