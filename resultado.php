@@ -52,7 +52,7 @@
                 
                     echo "</table>";
                 }
-                ?>
+            ?>
         </div>
 
         <div class="tabela">
