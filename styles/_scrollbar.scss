@@ -1,22 +1,24 @@
+@import "variables";
+
 *{
     scrollbar-width: thin;          
-    scrollbar-color: #514869 #201b2c;
+    scrollbar-color: $bg3-color $bg-color;
 
     ::-webkit-scrollbar {
         width: 8px;
     }
     
     ::-webkit-scrollbar-track {
-        background: #201b2c;
+        background: $bg-color;
     }
 
     ::-webkit-scrollbar-thumb {
-        background-color: #514869;
+        background-color: $bg3-color;
         border-radius: 30px;
     }
 
     ::-webkit-scrollbar-corner {
-        background: #201b2c;
+        background: $bg-color;
     }
 
 }

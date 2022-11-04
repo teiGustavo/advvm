@@ -141,7 +141,7 @@ body .main-login .left-login {
   flex-direction: column;
 }
 body .main-login .left-login h1 {
-  color: #77ffc0;
+  color: white;
   font-size: 3vw;
 }
 body .main-login .left-login .left-login-image {
@@ -188,7 +188,7 @@ body .main-login .right-login .card-login .textfield input, body .main-login .ri
   border-radius: 10px;
   padding: 15px;
   background: #514869;
-  color: rgba(240, 255, 255, 0.8705882353);
+  color: white;
   font-size: 12pt;
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
   outline: none;
@@ -198,7 +198,7 @@ body .main-login .right-login .card-login .textfield select, body .main-login .r
   text-transform: capitalize;
 }
 body .main-login .right-login .card-login .textfield label {
-  color: rgba(240, 255, 255, 0.8705882353);
+  color: white;
   margin-bottom: 10px;
 }
 body .main-login .right-login .card-login .textfield input::-moz-placeholder {
@@ -282,6 +282,7 @@ body .tabela .tabela2 .cod_lancamento {
 @media only screen and (max-width: 900px) {
   body .main-login {
     flex-direction: column;
+    height: auto;
   }
   body .main-login .left-login {
     width: 100%;

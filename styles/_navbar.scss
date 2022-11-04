@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
+@import "variables";
+
 .nvb {
     width: 99vw;
     height:10vh;
@@ -17,7 +19,7 @@
         width: -moz-available;
         
         a {
-            color: white;
+            color: $white-color;
             text-decoration: none;
         }
 
@@ -37,7 +39,7 @@
 
                 .active {
                     a {
-                        color: #ed3c57;
+                        color: $red-color;
                         font-weight: 600;
                     }
                 }
@@ -78,13 +80,13 @@
         }
 
         a {
-            color: white;
+            color: $white-color;
             text-decoration: none;
         }
 
         .active {
             a {
-                color: #ed3c57;
+                color: $red-color;
                 font-weight: 600;
             }
         }

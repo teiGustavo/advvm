@@ -2,6 +2,7 @@
 
 @import "navbar";
 @import "scrollbar";
+@import "variables";
 
 * {
     margin: 0;
@@ -11,13 +12,13 @@
 
 body {
     font-family: 'Noto-Sans', sans-serif;
-    background: #201b2c;
+    background: $bg-color;
     width: 99vw;
     height: 100vh;
 
     .main-login {
         width: 99vw;
-        background: #201b2c;
+        background: $bg-color;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -32,7 +33,7 @@ body {
             flex-direction: column;
         
             h1 {
-                color: #77ffc0;
+                color: $white-color;
                 font-size: 3vw;
             }
 
@@ -56,18 +57,18 @@ body {
                 align-items: center;
                 flex-direction: column;
                 padding: 30px 35px;
-                background: #2f2841;
+                background: $bg2-color;
                 border-radius: 20px;
                 box-shadow: 0px 10px 40px #00000056;
     
                 h1 {
-                    color: #00ff88;
+                    color: $green-two-color;
                     font-weight: 800;
                     margin: 0;
                 }
 
                 a {
-                    color: white;
+                    color: $white-color;
                 }
     
                 .textfield {
@@ -83,8 +84,8 @@ body {
                         border: none;
                         border-radius: 10px;
                         padding: 15px;
-                        background: #514869;
-                        color: #f0ffffde;
+                        background: $bg3-color;
+                        color: $white-color;
                         font-size: 12pt;
                         box-shadow: 0px 10px 40px #00000056;
                         outline: none;
@@ -96,13 +97,13 @@ body {
                     }
     
                     label {
-                        color: #f0ffffde;
+                        color: $white-color;
                         margin-bottom: 10px;
     
                     }
     
                     input::placeholder {
-                        color: #f0ffff94;
+                        color: $gray-color;
                     }
 
                     input:invalid {
@@ -128,8 +129,8 @@ body {
                 text-transform: uppercase;
                 font-weight: 800;
                 letter-spacing: 3px;
-                color: #2b134b;
-                background: #00ff88;
+                color: $purple-color;
+                background: $green-two-color;
                 cursor: pointer;
                 box-shadow: 0px 10px 40px -12px #00ff8052;
             }
@@ -140,10 +141,10 @@ body {
         text-align: center;
         margin: auto;
         width: fit-content;
-        color: aqua;
+        color: $aqua-color;
 
         a {
-            color: white;
+            color: $white-color;
         }
 
         .tabela2{
@@ -153,7 +154,7 @@ body {
             table, th, td {
                 border: 1px solid;
                 padding: 25px;
-                color: white;
+                color: $white-color;
             }
             
             th {
@@ -169,6 +170,7 @@ body {
     @media only screen and (max-width: 900px) {
         .main-login {
             flex-direction: column;
+            height: auto;
         
             .left-login {
                 width: 100%;
