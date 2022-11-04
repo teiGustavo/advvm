@@ -8,6 +8,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: $white-color;
 }
 
 body {
@@ -99,7 +100,6 @@ body {
                     label {
                         color: $white-color;
                         margin-bottom: 10px;
-    
                     }
     
                     input::placeholder {
@@ -115,6 +115,20 @@ body {
                         25% { transform: translateX(4px) }
                         50% { transform: translateX(-4px) }
                         75% { transform: translateX(4px) }
+                    }
+                }
+
+                .checkbox {
+                    align-self: flex-start;
+                    padding-top: 10px;
+                    margin-left: 5px;
+
+                    label {
+                        color: $white-color;
+                    }
+
+                    input {
+                        border-radius: 10px;
                     }
                 }
             }
@@ -229,6 +243,7 @@ body {
     @media only screen and (max-width: 600px) {
         .main-login {
             flex-direction: column;
+            height: auto;
         
             .left-login {
                 width: 100%;

@@ -1,3 +1,4 @@
+//Variáveis
 var nav_links = document.getElementById('nav-links');
 var nav_links_two = document.getElementById('nav-links-two');
 var li_one = document.querySelector('#li-one');
@@ -5,6 +6,13 @@ var li_two = document.querySelector('#li-two');
 var main_login = document.querySelector('#main-login');
 var main_login_height = $('#main-login').css('height');
 
+//Detectar mudança de tamanho da DIV main-login
+$(window).resize(function() {
+    main_login_height = $('#main-login').css('height');
+    nav_links_two.style.display = 'none';
+});
+
+//Funções
 function apareceMenu() {
     if (nav_links_two.style.display == 'block') {
         nav_links_two.style.display = 'none';
@@ -14,7 +22,7 @@ function apareceMenu() {
         nav_links_two.style.background = '#201b2c';
         nav_links_two.style.opacity = 0.9;
     }
-}
+};
 
 function pagConsulta() {
     var li_one = document.querySelector('#li-one');
@@ -27,7 +35,7 @@ function pagConsulta() {
 
     li_one_two.classList.remove('active');
     li_two_two.classList.add('active');
-}
+};
 
 function pagEntradas() {
     var li_one = document.querySelector('#li-one');
@@ -40,7 +48,7 @@ function pagEntradas() {
 
     li_one_two.classList.remove('active');
     li_three_two.classList.add('active');
-}
+};
 
 function pagSaidas() {
     var li_one = document.querySelector('#li-one');
@@ -53,8 +61,8 @@ function pagSaidas() {
 
     li_one_two.classList.remove('active');
     li_four_two.classList.add('active');
-}
+};
 
-function nvb() {
+function pagLogin() {
     main_login.style.height = '100vh';
-}
+};

@@ -15,10 +15,10 @@
         <link rel="stylesheet" href="styles/main.css">
         <title>Login</title>
     </head>
-    <body onload="nvb()">
+    <body onload="pagLogin()">
         <div class="main-login" id="main-login">
             <div class="left-login">
-                <h1>Faça login!<br>A.D Videira Verdadeira</h1>
+                <h1>Login ADM<br>A.D Videira Verdadeira</h1>
                 <img src="styles/img/audit-animate.svg" class="left-login-image" alt="Astronauta animação">
             </div>
 
@@ -34,6 +34,10 @@
                             <label for="Senha">Senha</label>
                             <input type="password" name="Senha" placeholder="Insira sua senha aqui" required>
                         </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="Manter" value="Manter">
+                            <label for="Manter">Manter-se conectado?</label>
+                        </div>
                         <button type="submit" class="btn-login" name="btn-logar">LOGAR</button>
                         <a href="index.php">Entrar sem conta</a>
                     </div>
@@ -42,7 +46,7 @@
 
         </div>
 
-        <?php 
+        <?php
             if (isset($_POST['btn-logar'])) {
                 $email = $_POST['Email'];
                 $senha = $_POST['Senha'];
@@ -57,17 +61,22 @@
                     $result = mysqli_query($conexao, $sql);
                     $a = mysqli_fetch_array($result);
                     $_SESSION["adm"] = $a[0];
+
+                    if ($_POST['Manter'] == "Manter") {
+                        setcookie("Adm", $email, time()+3600);
+                    }
                     
                     header("location: index.php");
                 } else {
                     $_SESSION['logado'] = 0;
-
+                    //echo "Administrador não encontrado!";
                 }
             }
         ?>
 
     </body>
-
+    
+    <script src="JS/jquery-3.6.0.min.js"></script>
     <script src="JS/funcoes.js"></script>
 
 </html>

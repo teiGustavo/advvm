@@ -116,6 +116,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: white;
 }
 
 body {
@@ -238,6 +239,17 @@ body .main-login .right-login .card-login .textfield input:invalid {
     transform: translateX(4px);
   }
 }
+body .main-login .right-login .card-login .checkbox {
+  align-self: flex-start;
+  padding-top: 10px;
+  margin-left: 5px;
+}
+body .main-login .right-login .card-login .checkbox label {
+  color: white;
+}
+body .main-login .right-login .card-login .checkbox input {
+  border-radius: 10px;
+}
 body .main-login .right-login .btn-login {
   width: 100%;
   padding: 16px 0px;
@@ -329,6 +341,7 @@ body .tabela .tabela2 .cod_lancamento {
 @media only screen and (max-width: 600px) {
   body .main-login {
     flex-direction: column;
+    height: auto;
   }
   body .main-login .left-login {
     width: 100%;
