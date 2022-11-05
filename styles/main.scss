@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
-
 @import "navbar";
 @import "scrollbar";
 @import "variables";
+@import "table";
 
 * {
     margin: 0;
@@ -151,34 +150,20 @@ body {
         }
     }
 
-    .tabela{
-        text-align: center;
-        margin: auto;
-        width: fit-content;
-        color: $aqua-color;
-
-        a {
-            color: $white-color;
-        }
-
-        .tabela2{
-            margin-top: 10vw;
-            border-collapse: collapse;
-            
-            table, th, td {
-                border: 1px solid;
-                padding: 25px;
-                color: $white-color;
-            }
-            
-            th {
-                text-transform: uppercase;
-            }
-
-            .cod_lancamento {
-                display: none;
-            }
-        }
+    .btn {
+        width: 100%;
+        padding: 16px 0px;
+        margin: 25px;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: 3px;
+        color: $purple-color;
+        background: $green-two-color;
+        cursor: pointer;
+        box-shadow: 0px 10px 40px -12px #00ff8052;
     }
     
     @media only screen and (max-width: 900px) {

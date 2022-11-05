@@ -4,6 +4,9 @@
     if (!isset($_SESSION)) {
         session_start();
     }
+
+    //Tempo em segundos (3600 segundos * 24 = 24 horas ou 86400 segundos)
+    $cookietime = time() + (3600 * 24);
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +52,7 @@
         <?php
             if (isset($_POST['btn-logar'])) {
                 $email = $_POST['Email'];
-                $senha = $_POST['Senha'];
+                $senha = md5($_POST['Senha']);
 
                 $sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
                 $result = mysqli_query($conexao, $sql);
@@ -63,7 +66,8 @@
                     $_SESSION["adm"] = $a[0];
 
                     if ($_POST['Manter'] == "Manter") {
-                        setcookie("Adm", $email, time()+3600);
+                        //Cria cookie do Administrador (Tempo é dado em segundos)
+                        setcookie("Adm", $email, $cookietime);
                     }
                     
                     header("location: index.php");

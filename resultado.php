@@ -1,3 +1,7 @@
+<?php
+    include "verificaSessao.php";
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -105,6 +109,34 @@
             <br>
             <br>    
             <a href="consulta.php">Selecionar outro mês!</a>
+            <br>
+
+            <?php
+                echo "<a href='Arquivos/Excel.txt' download='Excel.txt'><button type='button' class='btn' style='margin: 0px; margin-bottom: 25px; margin-top: 25px;'>Baixar excel</button></a>";
+              
+                $sqlExcel = "SELECT cod_lancamento, DATE_FORMAT(data, '%d/%m/%Y'), historico, tipo, CONCAT('R$ ', REPLACE(REPLACE(REPLACE(FORMAT(valor, 2),'.',';'),',','.'),';',',')) FROM $tabela WHERE DATE_FORMAT(data, '%M') = '$mes' ORDER BY DATE_FORMAT(data, '%d')";
+                $resultExcel = mysqli_query($conexao, $sqlExcel);
+                $rowExcel = mysqli_num_rows($resultExcel);
+                $fieldsExcel = mysqli_num_fields($resultExcel);
+
+                //Criar arquivo na pasta Arquivos
+                $arquivo = fopen('Arquivos/Excel.txt','w');
+
+                while ($l = mysqli_fetch_array($resultExcel)) {
+
+                    //Escreve no txt
+                    for ($i=1; $i<$fieldsExcel; $i++) {
+                        $texto = $l[$i].';';
+                        fwrite($arquivo, $texto);
+                    }
+
+                    //Quebra linha
+                    fwrite($arquivo, "\r\n");
+                }
+
+                //Fechar o arquivo
+                fclose($arquivo); 
+            ?>
         </div>
     </body>
 </html>

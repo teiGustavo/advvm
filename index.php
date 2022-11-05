@@ -1,6 +1,5 @@
 <?php
    include "verificaSessao.php";
-   //echo $_COOKIE["Adm"];
 ?>
 
 <!DOCTYPE html>

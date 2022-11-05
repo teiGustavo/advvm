@@ -4,7 +4,7 @@
     
     $adm = $_SESSION["adm"];
 
-    if ($adm == 1) {
+    if (isset($_COOKIE['Adm']) || $adm == 1) {
         echo "<div class='nvb'>";
             echo "<nav class='navbar'>";
                 echo "<a href='index.php' class='logo'>ADVVM</a>";
