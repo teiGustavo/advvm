@@ -135,7 +135,7 @@
                 }
 
                 //Fechar o arquivo
-                fclose($arquivo); 
+                fclose($arquivo);
             ?>
         </div>
     </body>
