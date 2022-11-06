@@ -52,7 +52,6 @@
         </div>
 
     </body>
-
     <script src="JS/jquery-3.6.0.min.js"></script>
     <script src="JS/funcoes.js"></script>
 </html>

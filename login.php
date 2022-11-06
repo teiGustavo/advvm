@@ -1,12 +1,42 @@
 <?php
     include "conexao.php";
-
-    if (!isset($_SESSION)) {
-        session_start();
-    }
+    include "verificaSessao.php";
 
     //Tempo em segundos (3600 segundos * 24 = 24 horas ou 86400 segundos)
     $cookietime = time() + (3600 * 24);
+
+    if (isset($_COOKIE["Adm"])) {
+        $_SESSION['logado'] = 1;
+        header("location: index.php");
+    }
+
+    if (isset($_POST['btn-logar'])) {
+        $email = $_POST['Email'];
+        $senha = md5($_POST['Senha']);
+
+        $sqlLogin = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
+        $resultadoLogin = mysqli_query($conexao, $sqlLogin);
+        $row = mysqli_num_rows($resultadoLogin);
+
+        if ($row == 1) {
+            $_SESSION['logado'] = 1;
+            $sql = "SELECT adm FROM usuario";
+            $result = mysqli_query($conexao, $sql);
+            $a = mysqli_fetch_array($result);
+            $_SESSION["adm"] = $a[0];
+
+            if ($_POST['Manter'] == "Manter") {
+                //Cria cookie do Administrador (Tempo é dado em segundos)
+                setcookie("Adm", $email, $cookietime);
+            }
+            
+            header("location: index.php");
+        } else {
+            $_SESSION['logado'] = 0;
+            //echo "Administrador não encontrado!";
+        }
+    }
+        
 ?>
 
 <!DOCTYPE html>
@@ -48,36 +78,6 @@
             </form>
 
         </div>
-
-        <?php
-            if (isset($_POST['btn-logar'])) {
-                $email = $_POST['Email'];
-                $senha = md5($_POST['Senha']);
-
-                $sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
-                $result = mysqli_query($conexao, $sql);
-                $row = mysqli_num_rows($result);
-
-                if ($row == 1) {
-                    $_SESSION['logado'] = 1;
-                    $sql = "SELECT adm FROM usuario";
-                    $result = mysqli_query($conexao, $sql);
-                    $a = mysqli_fetch_array($result);
-                    $_SESSION["adm"] = $a[0];
-
-                    if ($_POST['Manter'] == "Manter") {
-                        //Cria cookie do Administrador (Tempo é dado em segundos)
-                        setcookie("Adm", $email, $cookietime);
-                    }
-                    
-                    header("location: index.php");
-                } else {
-                    $_SESSION['logado'] = 0;
-                    //echo "Administrador não encontrado!";
-                }
-            }
-        ?>
-
     </body>
     
     <script src="JS/jquery-3.6.0.min.js"></script>

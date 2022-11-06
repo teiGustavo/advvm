@@ -14,7 +14,7 @@
 
     //Juntando as células para formar o título
     $sheet -> mergeCells('A1:D1');
-    $sheet -> getRowDimension('1') -> setRowHeight(26);
+    $sheet -> getRowDimension('1') -> setRowHeight('30');
 
     //Alinhando o título ao centro
     $sheet -> getStyle('A:D') -> getAlignment() -> setHorizontal('center');
@@ -22,7 +22,7 @@
 
     //Definindo larguras
     $sheet -> getColumnDimension('A') -> setWidth('15');
-    $sheet -> getColumnDimension('B') -> setWidth('30');
+    $sheet -> getColumnDimension('B') -> setWidth('45');
     $sheet -> getColumnDimension('D') -> setWidth('20');
 
     //Cabeçalho da planilha
@@ -30,19 +30,16 @@
     $sheet -> setCellValue('B2', 'HISTÓRICO');
     $sheet -> setCellValue('C2', 'TIPO');
     $sheet -> setCellValue('D2', 'VALOR');
+    $sheet -> getRowDimension('2') -> setRowHeight('25');
 
     //Valores
-    /*$sheet -> setCellValue('A3', '01/07/2022');
-    $sheet -> setCellValue('B3', 'Saldo Anterior');
-    $sheet -> setCellValue('C3', 'Entrada');
-    $sheet -> setCellValue('D3', 'R$ 1000,00');*/
-
     include "conexao.php";
+
     $tabela = 'relatorio';
-    $mes = 'Maio';
+    $mes = $_POST['mes'];
 
     mysqli_query($conexao, 'SET lc_time_names=pt_BR');
-    $sqlExcel = "SELECT cod_lancamento, DATE_FORMAT(data, '%d/%m/%Y'), historico, tipo, CONCAT('R$ ', REPLACE(REPLACE(REPLACE(FORMAT(valor, 2),'.',';'),',','.'),';',',')) FROM $tabela WHERE DATE_FORMAT(data, '%M') = '$mes' ORDER BY DATE_FORMAT(data, '%d')";
+    $sqlExcel = "SELECT cod_lancamento, DATE_FORMAT(data, '%d/%m/%Y'), historico, tipo, valor FROM $tabela WHERE DATE_FORMAT(data, '%M') = '$mes' ORDER BY DATE_FORMAT(data, '%d')";
     $resultExcel = mysqli_query($conexao, $sqlExcel);
     $rowExcel = mysqli_num_rows($resultExcel);
     $fieldsExcel = mysqli_num_fields($resultExcel);
@@ -57,33 +54,65 @@
     
     $num = 0;
     for ($i=3; $i<$rowExcel+3; $i++) {
-        for ($j=1; $j<=4; $j++) {
-            if ($j == 1) {
-                $letra = 'A';
-            } else if ($j == 2) {
-                $letra = 'B';
-            } else if ($j == 3) {
-                $letra = 'C';
-            } else if ($j == 4) {
-                $letra = 'D';
-            }
-
-            for ($p=1; $p<=4; $p++) {
-                $sheet -> setCellValue($letra.$i, $texto[$num][$num]);
-            }
-            
-            //$sheet -> setCellValue('A'.$i, $texto[$j]);
-            //$sheet -> setCellValue('B'.$i, $texto[$j]);
-            //$sheet -> setCellValue('C'.$i, $texto[$j]);
-            //$sheet -> setCellValue('D'.$i, $texto[$j]);
+        for ($p=1; $p<=4; $p++) {
+            $sheet -> setCellValue('A'.$i, $texto[$num][1]);
+            $sheet -> setCellValue('B'.$i, $texto[$num][2]);
+            $sheet -> setCellValue('C'.$i, $texto[$num][3]);
+            $sheet -> setCellValue('D'.$i, $texto[$num][4]);
+            $sheet -> getStyle('D'.$i) -> getNumberFormat() -> setFormatCode('R$ #,##0.00');
         }
-        
+    
         $num++;
     }
 
-    print_r($texto).
+    for ($i=3; $i<=$rowExcel+2; $i++) {
+        $sheet -> getRowDimension($i) -> setRowHeight('20');
+    }
+
+    //Estilo
+    $styleArray = [
+        'Borda Externa' => [
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ],
+
+        'Borda Direita' => [
+            'borders' => [
+                'right' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ],
+
+        'Borda Inferior' => [
+            'borders' => [
+                'bottom' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ],
+    ];
+    
+    $sheet -> getStyle('A1:D'.$rowExcel+2) -> applyFromArray($styleArray['Borda Externa']);
+
+    $sheet -> getStyle('A2:A'.$rowExcel+2) -> applyFromArray($styleArray['Borda Direita']); 
+    $sheet -> getStyle('B2:B'.$rowExcel+2) -> applyFromArray($styleArray['Borda Direita']); 
+    $sheet -> getStyle('C2:C'.$rowExcel+2) -> applyFromArray($styleArray['Borda Direita']); 
+    $sheet -> getStyle('D2:D'.$rowExcel+2) -> applyFromArray($styleArray['Borda Direita']); 
+    
+    $sheet -> getStyle('A1:D1') -> applyFromArray($styleArray['Borda Inferior']); 
+    $sheet -> getStyle('A2:D2') -> applyFromArray($styleArray['Borda Inferior']); 
+
+    $sheet -> getStyle('A1') -> getFill() -> setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID); 
+    $sheet -> getStyle('A1') -> getFill() -> getStartColor() -> setARGB('63cbce');
     
     $writer = new Xlsx($spreadsheet);
 
-    $writer->save('Arquivos/Relatorio.xlsx');
+    $writer->save('Arquivos/Relatório Mês de '.$mes.'.xlsx');
 ?>

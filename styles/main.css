@@ -146,6 +146,11 @@ body .tabela .tabela2 .cod_lancamento {
   display: none;
 }
 
+/*@media only screen and (max-width: 800px) {
+    .tabela2 {
+        display: none;  
+    }
+}*/
 * {
   margin: 0;
   padding: 0;

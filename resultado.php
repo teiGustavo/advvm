@@ -1,5 +1,6 @@
 <?php
     include "verificaSessao.php";
+    include "gerarExcel.php";
 ?>
 
 <!DOCTYPE html>
@@ -9,14 +10,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/main.css">
-        <title>Consulta <?php if (isset($_POST['btn'])) { echo "Mês ".$_POST['mes']; } ?></title>
+        <title>Consulta <?php if (isset($_POST['btn-adm'])) { echo "Mês ".$_POST['mes']; } ?></title>
     </head>
     <body>
         <div class="tabela">
             <?php
                 include "conexao.php";
 
-                if (isset($_POST['btn'])) {
+                if (isset($_POST['btn-adm'])) {
                     mysqli_query($conexao, 'SET lc_time_names=pt_BR');
 
                     $tabela = 'relatorio';
@@ -108,34 +109,11 @@
             
             <br>
             <br>    
-            <a href="consulta.php">Selecionar outro mês!</a>
             <br>
-
-            <?php
-                echo "<a href='Arquivos/Excel.txt' download='Excel.txt'><button type='button' class='btn' style='margin: 0px; margin-bottom: 25px; margin-top: 25px;'>Baixar excel</button></a>";
-              
-                $sqlExcel = "SELECT cod_lancamento, DATE_FORMAT(data, '%d/%m/%Y'), historico, tipo, CONCAT('R$ ', REPLACE(REPLACE(REPLACE(FORMAT(valor, 2),'.',';'),',','.'),';',',')) FROM $tabela WHERE DATE_FORMAT(data, '%M') = '$mes' ORDER BY DATE_FORMAT(data, '%d')";
-                $resultExcel = mysqli_query($conexao, $sqlExcel);
-                $rowExcel = mysqli_num_rows($resultExcel);
-                $fieldsExcel = mysqli_num_fields($resultExcel);
-
-                //Criar arquivo na pasta Arquivos
-                $arquivo = fopen('Arquivos/Excel.txt','w');
-
-                while ($l = mysqli_fetch_array($resultExcel)) {
-
-                    //Escreve no txt
-                    for ($i=1; $i<$fieldsExcel; $i++) {
-                        $texto = $l[$i].';';
-                        fwrite($arquivo, $texto);
-                    }
-
-                    //Quebra linha
-                    fwrite($arquivo, "\r\n");
-                }
-
-                //Fechar o arquivo
-                fclose($arquivo);
+            <?php 
+                $caminho = "Arquivos/Relatório Mês de ".$mes.".xlsx";
+                $arquivo = "Relatório Mês de ".$mes.".xlsx";
+                echo "<a href='$caminho' download='$arquivo'><button type='button' class='btn' style='margin: 0px; margin-bottom: 25px; margin-top: 25px;'>Baixar excel</button></a>";
             ?>
         </div>
     </body>

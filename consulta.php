@@ -1,5 +1,13 @@
 <?php
     include "conexao.php";
+    include "verificaSessao.php";
+
+    
+    if (isset($_POST['btn'])) {
+        include "gerarExcel.php";
+        $caminho = "Arquivos/Relatório Mês de ".$_POST['mes'].".xlsx";
+        header("location: $caminho");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +27,15 @@
                 <img src="styles/img/curious-animate.svg" class="left-login-image" alt="Astronauta animação">
             </div>
 
-            <form method="POST" action="resultado.php" target="_blank">
+            <?php
+                if ($_SESSION['adm'] == 1) {
+                   echo "<form method='POST' action='resultado.php' target='_blank'>";
+                } else {
+                    echo "<form method='POST' action=''>";
+                }
+            ?>
+
+            <!--form method="POST" action="resultado.php" target="_blank"-->
                 <div class="right-login">
                     <div class="card-login">
                         <h1>CONSULTAR</h1>
@@ -39,10 +55,19 @@
                                 ?>
                             </select>
                         </div>
-                        <button type="submit" class="btn-login" name="btn">Consultar</button>
+                        <?php 
+                            if ($_SESSION['adm'] == 0) {
+                                echo "<button type='submit' class='btn-login' name='btn'>Baixar planilha</button>";
+                            } else {
+                                echo "<button type='submit' class='btn-login' name='btn-adm'>Consultar</button>";
+                            }
+                        ?>
                     </div>
                 </div>
-            </form>
+
+            <?php 
+                echo "</form>"; 
+            ?>
 
         </div>
         
